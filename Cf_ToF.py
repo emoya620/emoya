@@ -5,7 +5,7 @@ Created on Mon Aug  5 10:45:25 2019
 
 @author: Emilio Moya
 
-Purpose: Creates a plot of the Time of Flight of neutrons and photons given data,
+Purpose: Creates a plot of the Time of Flight of neutrons and photons given data, 
 taken from a Cf-252 source.
     
 University of Michigan
@@ -29,7 +29,7 @@ def findEnergy(time):
     y = E
     return y
 
-#Creates the efficiency curve given a max and minimum energy, max efficiency, energy domain, and x-value
+#Creates the efficiency curve given a max and minimum energy, max efficiency, energy domain, and an x-value
 def efficiencyCurve(eMin, eMax, effMax, x):
     slope = (0 - effMax) / (eMax - eMin)
     b = 0 - (slope * eMax)
