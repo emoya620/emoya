@@ -34,12 +34,12 @@ def plotExp():
     
     #MULT_N stores all histories that have 2 or more neutrons
     MULT_N = data[data.Type == 1].groupby('History')["Type"].count().reset_index()
-#    #firstN stores the energy of the neutron that is the highest in the corresponding history
-#    firstN = (data[data.Type == 1].groupby('History')["Energy"].max().reset_index())['Energy']
-#    #firstN stores the energy of the neutron that is the lowest in the corresponding history
-#    lastN  = (data[data.Type == 1].groupby('History')["Energy"].min().reset_index())['Energy']
+    #firstN stores the energy of the neutron that is the highest in the corresponding history
+    firstN = (data[data.Type == 1].groupby('History')["Energy"].max().reset_index())['Energy']
+    #firstN stores the energy of the neutron that is the lowest in the corresponding history
+    lastN  = (data[data.Type == 1].groupby('History')["Energy"].min().reset_index())['Energy']
     
-    #Store enery of first and last channels
+    #Store energy of neutrons, based on first and last channels
     firstC = (data[data.Type == 1].groupby('History', as_index=False).apply(lambda x: x.loc[x['Channel'].idxmax()])).Energy
     lastC = (data[data.Type == 1].groupby('History', as_index=False).apply(lambda x: x.loc[x['Channel'].idxmin()])).Energy
     
@@ -59,6 +59,7 @@ def plotExp():
     plt.rcParams.update({'font.size': 16})
     plt.show()
     
+    #Plots a scatter plot of the neutron energies determined by first and last channel
     plt.scatter(firstC, lastC)
     plt.title("Scatterplot of Neutron Energies")
     plt.xlabel("E1")
@@ -68,5 +69,6 @@ def plotExp():
     #Assigns the energy difference data and bin data to variables, and then returns them
     [diffExp, expBins] = np.histogram(deltaE, np.linspace(eMin, eMax, numBins))
     return [diffExp, expBins]
+
 
 plotExp()
